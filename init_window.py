@@ -58,6 +58,35 @@ class Window(tk.Tk):
     def create_lbp_menu(self):
         lbp_menu = tk.Menu(self, tearoff="off")
         self.menu_bar.add_cascade(label='LBP', menu=lbp_menu, state='normal')
+        lbp_menu.add_command(label='Sobre', command=self.lbp_about)
+        lbp_menu.add_command(label='Aplicar modelo', command=self.lbp_apply)
+        
+    def lbp_about(self):
+        self.clear_control_frame()
+        title = tk.Label(self.controls, text='LBP - Local Binary Patterns', font=tkinter.font.Font(size=18))
+        title.grid(row=0, column=0, columnspan=2, pady=5)
+        about = tk.Label(self.controls, text='O LBP é um descritor de textura que pode ser usado para identificar objetos em imagens. Ele funciona calculando um histograma de padrões binários locais de uma imagem e, em seguida, usando o histograma como um vetor de características para treinar um classificador. O LBP é um descritor de textura simples e eficaz que pode ser usado para identificar objetos em imagens.', font=tkinter.font.Font(size=12), wraplength=1000, justify='left')
+        about.grid(row=1, column=0, columnspan=2, pady=5)
+        definition = tk.Label(self.controls, text='Definição do Modelo:', font=tkinter.font.Font(size=14))
+        definition.grid(row=2, column=0, columnspan=2, pady=5, sticky='w')
+        definition_text = tk.Label(self.controls, text='O LBP é uma técnica que extrai características locais de uma imagem analisando padrões de intensidade dos pixels. Ele opera em imagens em escala de cinza, onde cada pixel na imagem é comparado com seus vizinhos para formar um padrão binário. Esse padrão binário é gerado ao atribuir um valor binário (0 ou 1) para cada pixel, com base na comparação do valor do pixel central com os valores dos pixels ao redor dele.', font=tkinter.font.Font(size=12), wraplength=1000, justify='left')
+        definition_text.grid(row=3, column=0, columnspan=2, pady=5)
+        parameters = tk.Label(self.controls, text='Parâmetros e Funcionamento:', font=tkinter.font.Font(size=14))
+        parameters.grid(row=4, column=0, columnspan=2, pady=5, sticky='w')
+        parameters_text = tk.Label(self.controls, text='- Tamanho da Vizinhança (Raio): Determina a região ao redor de cada pixel que será considerada para calcular o padrão binário. Quanto maior o raio, maior a região considerada.\n\n- Número de Pontos na Vizinhança: Define o número de pixels a serem considerados ao redor do pixel central para formar o padrão binário. Por exemplo, o LBP com 8 pontos considera 8 pixels vizinhos ao redor do pixel central.', font=tkinter.font.Font(size=12), wraplength=1000, justify='left')
+        parameters_text.grid(row=5, column=0, columnspan=2, pady=5)
+        working = tk.Label(self.controls, text='O processo básico de cálculo do LBP é:\n\n- Selecione um pixel na imagem.\n\n- Defina uma vizinhança ao redor desse pixel com base no raio e número de pontos escolhidos.\n\n- Compare o valor do pixel central com os valores dos pixels vizinhos.\n\n- Atribua um valor binário (0 ou 1) para cada pixel vizinho, dependendo se o valor do pixel vizinho é maior ou igual ao valor do pixel central.\n\n- Forme um número binário concatenando os valores binários atribuídos aos pixels vizinhos. Esse número binário é o padrão binário LBP para o pixel central.\n\nPor exemplo, se tivermos uma vizinhança de 8 pontos e o valor do pixel central for 20 e os valores dos pixels vizinhos forem 22, 15, 25, 18, 20, 21, 23 e 17, o padrão binário LBP seria 10100101, dependendo se os valores dos pixels vizinhos são maiores ou iguais ao valor do pixel central.', font=tkinter.font.Font(size=12), wraplength=1000, justify='left')
+        working.grid(row=6, column=0, columnspan=2, pady=5)
+        application = tk.Label(self.controls, text='Aplicações:', font=tkinter.font.Font(size=14))
+        application.grid(row=7, column=0, columnspan=2, pady=5, sticky='w')
+        application_text = tk.Label(self.controls, text='Os padrões binários locais (LBP) são usados como descritores de textura e podem ser empregados em algoritmos de classificação, detecção de objetos e reconhecimento de padrões. Eles capturam informações discriminativas sobre a textura local, tornando-os úteis em uma variedade de tarefas de visão computacional.\n\nO LBP possui variações e extensões que adaptam a técnica para diferentes contextos e demandas específicas de aplicação. Sua eficácia, juntamente com sua simplicidade computacional, contribui para sua popularidade em várias áreas de processamento de imagens.', font=tkinter.font.Font(size=12), wraplength=1000, justify='left')
+        application_text.grid(row=8, column=0, columnspan=2, pady=5)
+        
+        
+    def lbp_apply(self):
+        about_text = tk.Label(self.controls, text='Aplicar modelo', font=tkinter.font.Font(size=20))
+        about_text.grid(row=0, column=0, columnspan=2, pady=10)
+        
     
     def create_hu_moments_menu(self):
         hu_moments_menu = tk.Menu(self, tearoff="off")
