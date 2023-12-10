@@ -73,16 +73,20 @@ Para este projeto, foram implementados dois descritores de características dife
 
 ## Instruções de Uso
 1. Instale o Miniconda ou Anaconda
-[Miniconda: Miniconda Installers](https://docs.conda.io/projects/miniconda/en/latest/index.html)
-[Anaconda: Anaconda Installers](https://www.anaconda.com/download/)
+- [Miniconda: Miniconda Installers](https://docs.conda.io/projects/miniconda/en/latest/index.html)
+- [Anaconda: Anaconda Installers](https://www.anaconda.com/download/)
 2. Crie um novo ambiente com Conda
-`conda env create -f "diretorio_do_projeto"\environment.yml`
+```bash
+conda env create -f "diretorio_do_projeto"\environment.yml
+```
 Substitua diretorio_do_projeto pelo endereço do diretório do seu projeto. 
 3. Ative o ambiente conda.
-`conda activate projetofinal`
+```bash
+conda activate projetofinal
+```
 5. Navegue até o diretório do projeto e execute o código
 ```bash
 cd "diretorio_do_projeto"
 python init_window.py
 ```
-6. Use a interface gráfica para executar os scripts.
+5. Use a interface gráfica para executar os scripts.
