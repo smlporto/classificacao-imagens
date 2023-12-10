@@ -3,7 +3,7 @@ import os, time
 from datetime import datetime
 import mlp_classifier, rf_classifier, svm_classifier
 
-def main():
+def exec_all_classifiers():
     mainStartTime = time.time()
     results = []
     modelNames = ['MLP','SVM','RF']
@@ -15,7 +15,7 @@ def main():
     results.append(rf_classifier.main())
     elapsedTime = round(time.time() - mainStartTime,2)
     print(f'[INFO] Total code execution time: {elapsedTime}s')
-    plotResults(modelNames,results)
+    return modelNames,results
 
 def plotResults(modelNames,results):
     fig, ax = plt.subplots()
@@ -35,5 +35,3 @@ def getCurrentFileNameAndDateTime():
     return fileName+dateTime    
     
 
-if __name__ == "__main__":
-    main()

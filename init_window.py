@@ -1,10 +1,11 @@
 import tkinter as tk
-from tkinter import filedialog
-import tkinter.font
-from PIL import Image, ImageTk
+from PIL import ImageTk, Image  
 import numpy as np
 from matplotlib import pyplot as plt
 import os
+import run_all_classifiers as rac
+import data_splitting as ds
+import lbp_FeatureExtraction as lbp
 
 class Window(tk.Tk):
   
@@ -58,7 +59,10 @@ class Window(tk.Tk):
     def create_lbp_menu(self):
         lbp_menu = tk.Menu(self, tearoff="off")
         self.menu_bar.add_cascade(label='LBP', menu=lbp_menu, state='normal')
-    
+        lbp_menu.add_command(label='Introdução', command=self.lbp_about)
+        lbp_menu.add_command(label='Aplicar modelo', command=self.lbp_apply)
+        
+
     def create_hu_moments_menu(self):
         hu_moments_menu = tk.Menu(self, tearoff="off")
         self.menu_bar.add_cascade(label='Hu Moments', menu=hu_moments_menu, state='normal')
@@ -97,6 +101,74 @@ class Window(tk.Tk):
                 self.rgb_color = img.getpixel((x,y))
                 self.update_segmentation_controls()
     
+    def lbp_about():
+        print('lbp_about')
+
+
+    def lbp_apply(self):
+        self.clear_control_frame()
+
+        nPoints_label = tk.Label(self.controls, text='Número de pontos da vizinhança:')
+        nPoints_label.grid(row=0, column=0, sticky=tk.W, pady=20)
+
+        nPoints_spinbox = tk.Spinbox(self.controls, from_=0, to=255)
+        nPoints_spinbox.grid(row=0, column=1,  sticky=tk.W, padx= 20)
+
+        radius_label = tk.Label(self.controls, text='Raio da vizinhança:')
+        radius_label.grid(row=0, column=2,  sticky=tk.W, pady=20)
+
+        radius_spinbox = tk.Spinbox(self.controls, from_=0, to=255)
+        radius_spinbox.grid(row=0, column=3,  sticky=tk.W)
+
+        iniciar_button = tk.Button(self.controls, text="Iniciar Treinamento", command=lambda: self.start_training(int(nPoints_spinbox.get()), int(radius_spinbox.get())))
+        iniciar_button.grid(row=0, column=4, sticky=tk.W, padx=20)
+        
+    def start_training(self, nPoints_value, radius_value):
+        try:
+            ds.exec_split()
+        except:
+            print('Erro ao dividir as imagens')
+        
+        try:
+            lbp.exec_lbp(nPoints_value, radius_value)
+        except:
+            print('Erro ao aplicar o modelo')
+
+       
+        results = rac.exec_all_classifiers()
+        plotResults(self, results[0], results[1])
+       
+          
+        
+
+def plotResults(self,modelNames,results):
+    fig, ax = plt.subplots()
+    bar_container = ax.bar(modelNames, results,color=['red', 'green', 'blue', 'cyan'])
+    ax.set_ylabel('Accuracy',weight='bold')
+    ax.set_xlabel('Models',weight='bold')
+    ax.set_title('Model comparison',fontsize=18,weight='bold')
+    ax.bar_label(bar_container, fmt='{:,.2f}%')
+    fileName = rac.getCurrentFileNameAndDateTime()
+    plt.savefig('./results/' + fileName, dpi=300) 
+    print(f'[INFO] Plotting final results done in ./results/{fileName}')
+    print(f'[INFO] Close the figure window to end the program.')
+
+    image = Image.open('./results/' + fileName + ".png")
+    new_width = int(image.width * 0.6)
+    new_height = int(image.height * 0.5)
+    resized_image = image.resize((new_width, new_height), Image.ANTIALIAS)
+    test = ImageTk.PhotoImage(resized_image)
+    label1 = tk.Label(image=test)
+    label1.image = test
+
+    screen_width = self.winfo_screenwidth()
+    image_width = resized_image.width 
+    x = (screen_width - image_width) / 2  # Calculating x position for centering
+
+    label1.place(x=x, y=100)
+
+    
+
 
 if __name__== '__main__':
     app=Window()
