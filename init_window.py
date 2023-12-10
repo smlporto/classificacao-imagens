@@ -64,34 +64,35 @@ class Window(tk.Tk):
         
     def lbp_about(self):
         self.clear_control_frame()
-        title = tk.Label(self.controls, text='LBP - Local Binary Patterns', font=tkinter.font.Font(size=18))
+        title = tk.Label(self.controls, text='LBP - Local Binary Patterns', font=('Arial', 18))
         title.grid(row=0, column=0, columnspan=2, pady=5)
-        about = tk.Label(self.controls, text='O LBP é um descritor de textura que pode ser usado para identificar objetos em imagens. Ele funciona calculando um histograma de padrões binários locais de uma imagem e, em seguida, usando o histograma como um vetor de características para treinar um classificador. O LBP é um descritor de textura simples e eficaz que pode ser usado para identificar objetos em imagens.', font=tkinter.font.Font(size=12), wraplength=1000, justify='left')
+        about = tk.Label(self.controls, text='O LBP é um descritor de textura que pode ser usado para identificar objetos em imagens. Ele funciona calculando um histograma de padrões binários locais de uma imagem e, em seguida, usando o histograma como um vetor de características para treinar um classificador. O LBP é um descritor de textura simples e eficaz que pode ser usado para identificar objetos em imagens.', font=('Arial', 12), wraplength=1000, justify='left')
         about.grid(row=1, column=0, columnspan=2, pady=5)
-        definition = tk.Label(self.controls, text='Definição do Modelo:', font=tkinter.font.Font(size=14))
+        definition = tk.Label(self.controls, text='Definição do Modelo:', font=('Arial', 14))
         definition.grid(row=2, column=0, columnspan=2, pady=5, sticky='w')
-        definition_text = tk.Label(self.controls, text='O LBP é uma técnica que extrai características locais de uma imagem analisando padrões de intensidade dos pixels. Ele opera em imagens em escala de cinza, onde cada pixel na imagem é comparado com seus vizinhos para formar um padrão binário. Esse padrão binário é gerado ao atribuir um valor binário (0 ou 1) para cada pixel, com base na comparação do valor do pixel central com os valores dos pixels ao redor dele.', font=tkinter.font.Font(size=12), wraplength=1000, justify='left')
+        definition_text = tk.Label(self.controls, text='O LBP é uma técnica que extrai características locais de uma imagem analisando padrões de intensidade dos pixels. Ele opera em imagens em escala de cinza, onde cada pixel na imagem é comparado com seus vizinhos para formar um padrão binário. Esse padrão binário é gerado ao atribuir um valor binário (0 ou 1) para cada pixel, com base na comparação do valor do pixel central com os valores dos pixels ao redor dele.', font=('Arial', 12), wraplength=1000, justify='left')
         definition_text.grid(row=3, column=0, columnspan=2, pady=5)
-        parameters = tk.Label(self.controls, text='Parâmetros e Funcionamento:', font=tkinter.font.Font(size=14))
+        parameters = tk.Label(self.controls, text='Parâmetros e Funcionamento:', font=('Arial', 14))
         parameters.grid(row=4, column=0, columnspan=2, pady=5, sticky='w')
-        parameters_text = tk.Label(self.controls, text='- Tamanho da Vizinhança (Raio): Determina a região ao redor de cada pixel que será considerada para calcular o padrão binário. Quanto maior o raio, maior a região considerada.\n\n- Número de Pontos na Vizinhança: Define o número de pixels a serem considerados ao redor do pixel central para formar o padrão binário. Por exemplo, o LBP com 8 pontos considera 8 pixels vizinhos ao redor do pixel central.', font=tkinter.font.Font(size=12), wraplength=1000, justify='left')
+        parameters_text = tk.Label(self.controls, text='- Tamanho da Vizinhança (Raio): Determina a região ao redor de cada pixel que será considerada para calcular o padrão binário. Quanto maior o raio, maior a região considerada.\n\n- Número de Pontos na Vizinhança: Define o número de pixels a serem considerados ao redor do pixel central para formar o padrão binário. Por exemplo, o LBP com 8 pontos considera 8 pixels vizinhos ao redor do pixel central.', font=('Arial', 12), wraplength=1000, justify='left')
         parameters_text.grid(row=5, column=0, columnspan=2, pady=5)
-        working = tk.Label(self.controls, text='O processo básico de cálculo do LBP é:\n\n- Selecione um pixel na imagem.\n\n- Defina uma vizinhança ao redor desse pixel com base no raio e número de pontos escolhidos.\n\n- Compare o valor do pixel central com os valores dos pixels vizinhos.\n\n- Atribua um valor binário (0 ou 1) para cada pixel vizinho, dependendo se o valor do pixel vizinho é maior ou igual ao valor do pixel central.\n\n- Forme um número binário concatenando os valores binários atribuídos aos pixels vizinhos. Esse número binário é o padrão binário LBP para o pixel central.\n\nPor exemplo, se tivermos uma vizinhança de 8 pontos e o valor do pixel central for 20 e os valores dos pixels vizinhos forem 22, 15, 25, 18, 20, 21, 23 e 17, o padrão binário LBP seria 10100101, dependendo se os valores dos pixels vizinhos são maiores ou iguais ao valor do pixel central.', font=tkinter.font.Font(size=12), wraplength=1000, justify='left')
+        working = tk.Label(self.controls, text='O processo básico de cálculo do LBP é:\n\n- Selecione um pixel na imagem.\n\n- Defina uma vizinhança ao redor desse pixel com base no raio e número de pontos escolhidos.\n\n- Compare o valor do pixel central com os valores dos pixels vizinhos.\n\n- Atribua um valor binário (0 ou 1) para cada pixel vizinho, dependendo se o valor do pixel vizinho é maior ou igual ao valor do pixel central.\n\n- Forme um número binário concatenando os valores binários atribuídos aos pixels vizinhos. Esse número binário é o padrão binário LBP para o pixel central.\n\nPor exemplo, se tivermos uma vizinhança de 8 pontos e o valor do pixel central for 20 e os valores dos pixels vizinhos forem 22, 15, 25, 18, 20, 21, 23 e 17, o padrão binário LBP seria 10100101, dependendo se os valores dos pixels vizinhos são maiores ou iguais ao valor do pixel central.', font=('Arial', 12), wraplength=1000, justify='left')
         working.grid(row=6, column=0, columnspan=2, pady=5)
-        application = tk.Label(self.controls, text='Aplicações:', font=tkinter.font.Font(size=14))
+        application = tk.Label(self.controls, text='Aplicações:', font=('Arial', 14))
         application.grid(row=7, column=0, columnspan=2, pady=5, sticky='w')
-        application_text = tk.Label(self.controls, text='Os padrões binários locais (LBP) são usados como descritores de textura e podem ser empregados em algoritmos de classificação, detecção de objetos e reconhecimento de padrões. Eles capturam informações discriminativas sobre a textura local, tornando-os úteis em uma variedade de tarefas de visão computacional.\n\nO LBP possui variações e extensões que adaptam a técnica para diferentes contextos e demandas específicas de aplicação. Sua eficácia, juntamente com sua simplicidade computacional, contribui para sua popularidade em várias áreas de processamento de imagens.', font=tkinter.font.Font(size=12), wraplength=1000, justify='left')
+        application_text = tk.Label(self.controls, text='Os padrões binários locais (LBP) são usados como descritores de textura e podem ser empregados em algoritmos de classificação, detecção de objetos e reconhecimento de padrões. Eles capturam informações discriminativas sobre a textura local, tornando-os úteis em uma variedade de tarefas de visão computacional.\n\nO LBP possui variações e extensões que adaptam a técnica para diferentes contextos e demandas específicas de aplicação. Sua eficácia, juntamente com sua simplicidade computacional, contribui para sua popularidade em várias áreas de processamento de imagens.', font=('Arial', 12), wraplength=1000, justify='left')
         application_text.grid(row=8, column=0, columnspan=2, pady=5)
         
         
     def lbp_apply(self):
-        about_text = tk.Label(self.controls, text='Aplicar modelo', font=tkinter.font.Font(size=20))
+        about_text = tk.Label(self.controls, text='Aplicar modelo', font=('Arial', 20))
         about_text.grid(row=0, column=0, columnspan=2, pady=10)
         
     
     def create_hu_moments_menu(self):
         hu_moments_menu = tk.Menu(self, tearoff="off")
         self.menu_bar.add_cascade(label='Hu Moments', menu=hu_moments_menu, state='normal')
+        
 
     def create_image_canvas(self):
         image_frame = tk.Frame(self)
@@ -109,12 +110,14 @@ class Window(tk.Tk):
         self.image_canvas.pack()
         yscrollbar.config(command = self.image_canvas.yview)
         xscrollbar.config(command = self.image_canvas.xview)
+        
     
     def activate_menus(self):
         self.menu_bar.entryconfig('Filtros',state='active')
         self.menu_bar.entryconfig('Imagem',state='active')
         self.menu_bar.entryconfig('Cores',state='active')
         self.menu_bar.entryconfig('Segmentação',state='active')
+        
 
     def get_color(self, event):
         if (np.ndim(self.image) > 2): #if more than 2 dimensions then it is a color image
@@ -126,9 +129,6 @@ class Window(tk.Tk):
                 img = Image.fromarray(self.image)
                 self.rgb_color = img.getpixel((x,y))
                 self.update_segmentation_controls()
-    
-    def lbp_about():
-        print('lbp_about')
 
 
     def lbp_apply(self):
@@ -149,6 +149,7 @@ class Window(tk.Tk):
         iniciar_button = tk.Button(self.controls, text="Iniciar Treinamento", command=lambda: self.start_training(int(nPoints_spinbox.get()), int(radius_spinbox.get())))
         iniciar_button.grid(row=0, column=4, sticky=tk.W, padx=20)
         
+        
     def start_training(self, nPoints_value, radius_value):
         try:
             ds.exec_split()
@@ -164,8 +165,6 @@ class Window(tk.Tk):
         results = rac.exec_all_classifiers()
         plotResults(self, results[0], results[1])
        
-          
-        
 
 def plotResults(self,modelNames,results):
     fig, ax = plt.subplots()
@@ -192,8 +191,6 @@ def plotResults(self,modelNames,results):
     x = (screen_width - image_width) / 2  # Calculating x position for centering
 
     label1.place(x=x, y=100)
-
-    
 
 
 if __name__== '__main__':
