@@ -22,18 +22,31 @@ Para este projeto, foram implementados dois descritores de características dife
 ## Video
 [Link do Video](https://github.com/seu_usuario/nome_do_repositorio)
 
-## Classificador e Acurácia
+## Classificador e Acurácia LBP
+### Parâmetros
+- Número de pontos da vizinhança: 24
+- Raio da vizinhança: 8
+
 ### MLP (Multilayer Perceptron)
 - Classificador utilizado: MLPClassifier do scikit-learn
-- Acurácia obtida: [Inserir Valor]% 
-
+- Acurácia obtida: 100,00% 
 ### Random Forest
 - Classificador utilizado: RandomForestClassifier do scikit-learn
-- Acurácia obtida: [Inserir Valor]% 
-
+- Acurácia obtida: 73,21% 
 ### SVM (Support Vector Machine)
 - Classificador utilizado: SVM do scikit-learn
-- Acurácia obtida: [Inserir Valor]%
+- Acurácia obtida: 96,43%
+
+## Classificador e Acurácia HU Moments
+### MLP (Multilayer Perceptron)
+- Classificador utilizado: MLPClassifier do scikit-learn
+- Acurácia obtida: 50% 
+### Random Forest
+- Classificador utilizado: RandomForestClassifier do scikit-learn
+- Acurácia obtida: 58,93% 
+### SVM (Support Vector Machine)
+- Classificador utilizado: SVM do scikit-learn
+- Acurácia obtida: 53,57%
 
 ## Estrutura de Pastas
 ```plaintext
@@ -59,10 +72,17 @@ Para este projeto, foram implementados dois descritores de características dife
 ```
 
 ## Instruções de Uso
-1. Clone o repositório para sua máquina local.
-2. Certifique-se de ter todas as dependências instaladas, incluindo o Python e as bibliotecas necessárias (scikit-learn, numpy, opencv, matplotlib).
-3. Execute o script `data_splitting.py` para organizar as imagens em conjuntos de treino e teste.
-4. Em seguida, execute o script `grayHistogram_FeatureExtraction.py` para extrair as características de histograma de tons de cinza.
-5. Utilize os scripts `mlp_classifier.py`, `rf_classifier.py` e `svm_classifier.py` para treinar e avaliar os classificadores MLP, Random Forest e SVM, respectivamente.
-6. Para executar todos os classificadores de uma vez, utilize o script `run_all_classifiers.py`.
-7. Os resultados, incluindo as matrizes de confusão e a acurácia, serão salvos na pasta `/results`.
+1. Instale o Miniconda ou Anaconda
+[Miniconda: Miniconda Installers](https://docs.conda.io/projects/miniconda/en/latest/index.html)
+[Anaconda: Anaconda Installers](https://www.anaconda.com/download/)
+2. Crie um novo ambiente com Conda
+`conda env create -f "diretorio_do_projeto"\environment.yml`
+Substitua diretorio_do_projeto pelo endereço do diretório do seu projeto. 
+3. Ative o ambiente conda.
+`conda activate projetofinal`
+5. Navegue até o diretório do projeto e execute o código
+```bash
+cd "diretorio_do_projeto"
+python init_window.py
+```
+6. Use a interface gráfica para executar os scripts.
