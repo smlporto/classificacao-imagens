@@ -1,0 +1,14 @@
+name: projetofinal
+channels:
+  - defaults
+dependencies:
+  - numpy
+  - opencv
+  - scikit-image
+  - scikit-learn
+  - progress
+  - matplotlib
+  - pip
+  - pip:
+    - split-folders
+    - Pillow==9.4.0
