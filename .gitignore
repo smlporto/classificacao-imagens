@@ -157,3 +157,6 @@ cython_debug/
 
 #ignore all png files
 *.png
+
+#ignore all csv files
+*.csv
