@@ -6,6 +6,7 @@ import os
 import run_all_classifiers as rac
 import data_splitting as ds
 import lbp_FeatureExtraction as lbp
+import huMoments_FeatureExtraction as huMoments
 
 class Window(tk.Tk):
   
@@ -61,7 +62,29 @@ class Window(tk.Tk):
         self.menu_bar.add_cascade(label='LBP', menu=lbp_menu, state='normal')
         lbp_menu.add_command(label='Sobre', command=self.lbp_about)
         lbp_menu.add_command(label='Aplicar modelo', command=self.lbp_apply)
-        
+
+    def hu_about(self):
+        self.clear_control_frame()
+        title = tk.Label(self.controls, text='HU Moments', font=('Arial', 18))
+        title.grid(row=0, column=0, columnspan=2, pady=5)
+        about = tk.Label(self.controls, text='Os Momentos de Hu (também conhecidos como HU Moments) são um conjunto de sete invariantes de forma que são calculados a partir de momentos estatísticos de uma imagem. Eles representam características únicas da forma de um objeto, independentemente de sua rotação, escala e posição.', font=('Arial', 12), wraplength=1000, justify='left')
+        about.grid(row=1, column=0, columnspan=2, pady=5)
+        definition = tk.Label(self.controls, text='Definição do Modelo:', font=('Arial', 14))
+        definition.grid(row=2, column=0, columnspan=2, pady=5, sticky='w')
+        definition_text = tk.Label(self.controls, text='Os Momentos de Hu são derivados dos momentos estatísticos, que são características numéricas de uma distribuição. Eles são invariantes a rotações, translações e escalas da forma, o que os torna úteis na descrição de objetos em imagens independentemente da orientação ou tamanho.', font=('Arial', 12), wraplength=1000, justify='left')
+        definition_text.grid(row=3, column=0, columnspan=2, pady=5)
+        parameters = tk.Label(self.controls, text='Parâmetros e Funcionamento:', font=('Arial', 14))
+        parameters.grid(row=4, column=0, columnspan=2, pady=5, sticky='w')
+        parameters_text = tk.Label(self.controls, text='Os HU Moments são calculados a partir dos momentos de uma imagem binária ou de escala de cinza. Eles são derivados dos momentos centrais normalizados, que são utilizados para criar invariantes à rotação, translação e escala.', font=('Arial', 12), wraplength=1000, justify='left')
+        parameters_text.grid(row=5, column=0, columnspan=2, pady=5)
+        working = tk.Label(self.controls, text='O processo básico de cálculo dos HU Moments é:\n\n- Calcular os momentos de uma imagem (por exemplo, momentos de escala de cinza ou momentos binários).\n\n- Calcular os momentos centrais normalizados a partir dos momentos obtidos.\n\n- Derivar os sete Momentos de Hu a partir dos momentos centrais normalizados.\n\nEsses momentos são invariantes a rotações, translações e escalas, tornando-os úteis para identificação e classificação de formas em imagens.', font=('Arial', 12), wraplength=1000, justify='left')
+        working.grid(row=6, column=0, columnspan=2, pady=5)
+        application = tk.Label(self.controls, text='Aplicações:', font=('Arial', 14))
+        application.grid(row=7, column=0, columnspan=2, pady=5, sticky='w')
+        application_text = tk.Label(self.controls, text='Os Momentos de Hu são amplamente utilizados em reconhecimento de padrões, visão computacional e processamento de imagem para identificação e classificação de formas. Eles são especialmente valiosos em aplicações onde a rotação, escala e posição dos objetos são variáveis e a invariância é essencial para uma análise precisa.', font=('Arial', 12), wraplength=1000, justify='left')
+        application_text.grid(row=8, column=0, columnspan=2, pady=5)
+
+
     def lbp_about(self):
         self.clear_control_frame()
         title = tk.Label(self.controls, text='LBP - Local Binary Patterns', font=('Arial', 18))
@@ -90,9 +113,17 @@ class Window(tk.Tk):
         
     
     def create_hu_moments_menu(self):
-        hu_moments_menu = tk.Menu(self, tearoff="off")
-        self.menu_bar.add_cascade(label='Hu Moments', menu=hu_moments_menu, state='normal')
+        hu_menu = tk.Menu(self, tearoff="off")
+        self.menu_bar.add_cascade(label='Hu Moments', menu=hu_menu, state='normal')
+        hu_menu.add_command(label='Sobre', command=self.hu_about)
+        hu_menu.add_command(label='Aplicar modelo', command=self.hu_moments_apply)
         
+    def hu_moments_apply(self):
+        self.clear_control_frame()
+
+        iniciar_button = tk.Button(self.controls, text="Iniciar Treinamento", command= self.start_training_HU)
+        iniciar_button.grid(row=0, column=4, sticky=tk.W, padx=20)
+
 
     def create_image_canvas(self):
         image_frame = tk.Frame(self)
@@ -146,11 +177,11 @@ class Window(tk.Tk):
         radius_spinbox = tk.Spinbox(self.controls, from_=0, to=255)
         radius_spinbox.grid(row=0, column=3,  sticky=tk.W)
 
-        iniciar_button = tk.Button(self.controls, text="Iniciar Treinamento", command=lambda: self.start_training(int(nPoints_spinbox.get()), int(radius_spinbox.get())))
+        iniciar_button = tk.Button(self.controls, text="Iniciar Treinamento", command=lambda: self.start_training_LBP(int(nPoints_spinbox.get()), int(radius_spinbox.get())))
         iniciar_button.grid(row=0, column=4, sticky=tk.W, padx=20)
         
         
-    def start_training(self, nPoints_value, radius_value):
+    def start_training_LBP(self, nPoints_value, radius_value):
         try:
             ds.exec_split()
         except:
@@ -164,7 +195,21 @@ class Window(tk.Tk):
        
         results = rac.exec_all_classifiers()
         plotResults(self, results[0], results[1])
+    
+    def start_training_HU(self):
+        try:
+            ds.exec_split()
+        except:
+            print('Erro ao dividir as imagens')
+        
+        try:
+            huMoments.exec_hu()
+        except:
+            print('Erro ao aplicar o modelo')
+
        
+        results = rac.exec_all_classifiers()
+        plotResults(self, results[0], results[1])
 
 def plotResults(self,modelNames,results):
     fig, ax = plt.subplots()
