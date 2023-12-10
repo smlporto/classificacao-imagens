@@ -1,11 +1,11 @@
 # Projeto de Processamento de Imagens - Classificação de Raios-X
 
-## Título do Projeto
+## Detector de Covid
 Detecção de COVID-19 em Raios-X Torácicos
 
 ## Equipe
 - [Carlos Eduardo Nogueira de Freitas Veiga](https://github.com/cenfv)
-- [Samuel Pereira Porto](https://github.com/cenfv)
+- [Samuel Pereira Porto](https://github.com/smlporto)
 - [Welyson Carlos](https://github.com/welyson1)
 
 ## Descrição do(s) Descritor(es) Implementado(s)
@@ -20,7 +20,7 @@ Para este projeto, foram implementados dois descritores de características dife
 [Link do Repositório no GitHub](https://github.com/smlporto/classificacao-imagens)
 
 ## Video
-[Link do Video](https://github.com/seu_usuario/nome_do_repositorio)
+[Link do Video](https://youtu.be/sighWM-pjxo)
 
 ## Classificador e Acurácia LBP
 ### Parâmetros
